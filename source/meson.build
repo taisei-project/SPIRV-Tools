@@ -192,7 +192,7 @@ libspirv_tools = library('SPIRV-Tools',
     spirv_src,
     cpp_pch : 'meson-pch/pch.h',
     dependencies : spvhdr_dep,
-    include_directories : private_incdir,
+    include_directories : [private_incdir, public_incdir],
     build_by_default : not meson.is_subproject(),
 )
 
