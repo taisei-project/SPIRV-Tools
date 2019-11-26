@@ -70,7 +70,8 @@ spirv_src = files(
 spirv_src += custom_target('build-version.inc',
     command : [update_build_version, project_root, '@OUTPUT@'],
     output : 'build-version.inc',
-    build_always : true,
+    build_always_stale : true,
+    build_by_default : true,
 )
 
 spirv_src += custom_target('spv-amd-shader-trinary-minmax.insts.inc',
@@ -199,6 +200,22 @@ libspirv_tools = library('SPIRV-Tools',
 spirv_tools_dep = declare_dependency(
     link_with : libspirv_tools,
     include_directories : public_incdir,
+    version : meson.project_version(),
+)
+
+libspirv_tools_native = library('SPIRV-Tools-native',
+    spirv_src,
+    cpp_pch : 'meson-pch/pch.h',
+    dependencies : spvhdr_dep,
+    include_directories : [private_incdir, public_incdir],
+    build_by_default : false,
+    native : true,
+)
+
+spirv_tools_native_dep = declare_dependency(
+    link_with : libspirv_tools_native,
+    include_directories : public_incdir,
+    version : meson.project_version(),
 )
 
 subdir('opt')
