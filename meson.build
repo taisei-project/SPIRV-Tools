@@ -2,7 +2,7 @@ project('SPIRV-Tools', 'cpp',
     version : '2019.4.136',
     meson_version : '>=0.48.0',
     default_options : [
-        'cpp_std=c++11',
+        'cpp_std=gnu++11',
     ]
 )
 
