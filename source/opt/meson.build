@@ -126,6 +126,7 @@ libspirv_tools_opt_native = library('SPIRV-Tools-opt-native',
     include_directories : private_incdir,
     build_by_default : false,
     native : true,
+    override_options : native_options,
 )
 
 spirv_tools_opt_native_dep = declare_dependency(

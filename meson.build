@@ -6,6 +6,14 @@ project('SPIRV-Tools', 'cpp',
     ]
 )
 
+native_options = [
+    'b_lto=false',
+    'b_ndebug=true',
+    'b_sanitize=none',
+    'debug=false',
+    'optimization=0',
+]
+
 spvhdr_proj = subproject('SPIRV-Headers')
 spvhdr_dep = spvhdr_proj.get_variable('spirv_headers_dep')
 spvhdr_incpath = spvhdr_proj.get_variable('spirv_include_path')

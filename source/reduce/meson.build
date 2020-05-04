@@ -46,6 +46,7 @@ libspirv_tools_recude_native = library('SPIRV-Tools-reduce-native',
     include_directories : private_incdir,
     build_by_default : false,
     native : true,
+    override_options : native_options,
 )
 
 spirv_tools_reduce_native_dep = declare_dependency(
