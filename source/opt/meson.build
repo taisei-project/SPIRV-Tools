@@ -101,6 +101,7 @@ opt_src = files(
 )
 
 libspirv_tools_opt = library('SPIRV-Tools-opt',
+    spirv_generated_headers,
     opt_src,
     cpp_pch : 'meson-pch/pch.h',
     dependencies : [spirv_tools_dep, spvhdr_dep],
@@ -115,6 +116,7 @@ spirv_tools_opt_dep = declare_dependency(
 )
 
 libspirv_tools_opt_native = library('SPIRV-Tools-opt-native',
+    spirv_generated_headers,
     opt_src,
     cpp_pch : 'meson-pch/pch.h',
     dependencies : [spirv_tools_native_dep, spvhdr_dep],

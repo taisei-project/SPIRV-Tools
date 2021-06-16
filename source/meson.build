@@ -67,14 +67,16 @@ spirv_src = files(
     'val/validation_state.cpp',
 )
 
-spirv_src += custom_target('build-version.inc',
+spirv_generated_headers = []
+
+spirv_generated_headers += custom_target('build-version.inc',
     command : [update_build_version, project_root, '@OUTPUT@'],
     output : 'build-version.inc',
     build_always_stale : true,
     build_by_default : true,
 )
 
-spirv_src += custom_target('spv-amd-shader-trinary-minmax.insts.inc',
+spirv_generated_headers += custom_target('spv-amd-shader-trinary-minmax.insts.inc',
     command : [
         gen_grammar_tables,
         '--extinst-vendor-grammar', '@INPUT@',
@@ -85,7 +87,7 @@ spirv_src += custom_target('spv-amd-shader-trinary-minmax.insts.inc',
     output : 'spv-amd-shader-trinary-minmax.insts.inc',
 )
 
-spirv_src += custom_target('nonsemantic.clspvreflection.insts.inc',
+spirv_generated_headers += custom_target('nonsemantic.clspvreflection.insts.inc',
     command : [
         gen_grammar_tables,
         '--extinst-vendor-grammar', '@INPUT@',
@@ -96,7 +98,7 @@ spirv_src += custom_target('nonsemantic.clspvreflection.insts.inc',
     output : 'nonsemantic.clspvreflection.insts.inc',
 )
 
-spirv_src += custom_target('spv-amd-shader-explicit-vertex-parameter.insts.inc',
+spirv_generated_headers += custom_target('spv-amd-shader-explicit-vertex-parameter.insts.inc',
     command : [
         gen_grammar_tables,
         '--extinst-vendor-grammar', '@INPUT@',
@@ -107,7 +109,7 @@ spirv_src += custom_target('spv-amd-shader-explicit-vertex-parameter.insts.inc',
     output : 'spv-amd-shader-explicit-vertex-parameter.insts.inc',
 )
 
-spirv_src += custom_target('spv-amd-shader-ballot.insts.inc',
+spirv_generated_headers += custom_target('spv-amd-shader-ballot.insts.inc',
     command : [
         gen_grammar_tables,
         '--extinst-vendor-grammar', '@INPUT@',
@@ -118,7 +120,7 @@ spirv_src += custom_target('spv-amd-shader-ballot.insts.inc',
     output : 'spv-amd-shader-ballot.insts.inc',
 )
 
-spirv_src += custom_target('spv-amd-gcn-shader.insts.inc',
+spirv_generated_headers += custom_target('spv-amd-gcn-shader.insts.inc',
     command : [
         gen_grammar_tables,
         '--extinst-vendor-grammar', '@INPUT@',
@@ -129,7 +131,7 @@ spirv_src += custom_target('spv-amd-gcn-shader.insts.inc',
     output : 'spv-amd-gcn-shader.insts.inc',
 )
 
-spirv_src += custom_target('DebugInfo.h',
+spirv_generated_headers += custom_target('DebugInfo.h',
     command : [
         gen_language_headers,
         '--extinst-grammar', '@INPUT@',
@@ -139,7 +141,7 @@ spirv_src += custom_target('DebugInfo.h',
     output : 'DebugInfo.h',
 )
 
-spirv_src += custom_target('OpenCLDebugInfo100.h',
+spirv_generated_headers += custom_target('OpenCLDebugInfo100.h',
     command : [
         gen_language_headers,
         '--extinst-grammar', '@INPUT@',
@@ -149,7 +151,7 @@ spirv_src += custom_target('OpenCLDebugInfo100.h',
     output : 'OpenCLDebugInfo100.h',
 )
 
-spirv_src += custom_target('debuginfo.insts.inc',
+spirv_generated_headers += custom_target('debuginfo.insts.inc',
     command : [
         gen_grammar_tables,
         '--extinst-vendor-grammar', '@INPUT@',
@@ -160,7 +162,7 @@ spirv_src += custom_target('debuginfo.insts.inc',
     output : 'debuginfo.insts.inc',
 )
 
-spirv_src += custom_target('extension_enum.inc and enum_string_mapping.inc',
+spirv_generated_headers += custom_target('extension_enum.inc and enum_string_mapping.inc',
     command : [
         gen_grammar_tables,
         '--spirv-core-grammar', '@INPUT0@',
@@ -173,7 +175,7 @@ spirv_src += custom_target('extension_enum.inc and enum_string_mapping.inc',
     output : ['extension_enum.inc', 'enum_string_mapping.inc'],
 )
 
-spirv_src += custom_target('generators.inc',
+spirv_generated_headers += custom_target('generators.inc',
     command : [
         gen_registry_tables,
         '--xml', '@INPUT@',
@@ -183,7 +185,7 @@ spirv_src += custom_target('generators.inc',
     output : 'generators.inc',
 )
 
-spirv_src += custom_target('core.insts-unified1.inc and operand.kinds-unified1.inc',
+spirv_generated_headers += custom_target('core.insts-unified1.inc and operand.kinds-unified1.inc',
     command : [
         gen_grammar_tables,
         '--spirv-core-grammar', '@INPUT0@',
@@ -196,7 +198,7 @@ spirv_src += custom_target('core.insts-unified1.inc and operand.kinds-unified1.i
     output : ['core.insts-unified1.inc', 'operand.kinds-unified1.inc'],
 )
 
-spirv_src += custom_target('glsl.std.450.insts.inc',
+spirv_generated_headers += custom_target('glsl.std.450.insts.inc',
     command : [
         gen_grammar_tables,
         '--extinst-glsl-grammar', '@INPUT@',
@@ -206,7 +208,7 @@ spirv_src += custom_target('glsl.std.450.insts.inc',
     output : 'glsl.std.450.insts.inc',
 )
 
-spirv_src += custom_target('opencl.std.insts.inc',
+spirv_generated_headers += custom_target('opencl.std.insts.inc',
     command : [
         gen_grammar_tables,
         '--extinst-opencl-grammar', '@INPUT@',
@@ -216,7 +218,7 @@ spirv_src += custom_target('opencl.std.insts.inc',
     output : 'opencl.std.insts.inc',
 )
 
-spirv_src += custom_target('opencl.debuginfo.100.insts.inc',
+spirv_generated_headers += custom_target('opencl.debuginfo.100.insts.inc',
     command : [
         gen_grammar_tables,
         '--extinst-vendor-grammar', '@INPUT@',
@@ -228,6 +230,7 @@ spirv_src += custom_target('opencl.debuginfo.100.insts.inc',
 )
 
 libspirv_tools = library('SPIRV-Tools',
+    spirv_generated_headers,
     spirv_src,
     cpp_pch : 'meson-pch/pch.h',
     dependencies : spvhdr_dep,
@@ -242,6 +245,7 @@ spirv_tools_dep = declare_dependency(
 )
 
 libspirv_tools_native = library('SPIRV-Tools-native',
+    spirv_generated_headers,
     spirv_src,
     cpp_pch : 'meson-pch/pch.h',
     dependencies : spvhdr_dep,

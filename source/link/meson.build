@@ -4,6 +4,7 @@ link_src = files(
 )
 
 libspirv_tools_link = library('SPIRV-Tools-link',
+    spirv_generated_headers,
     link_src,
     dependencies : [spirv_tools_dep, spirv_tools_opt_dep, spvhdr_dep],
     include_directories : private_incdir,
@@ -17,6 +18,7 @@ spirv_tools_link_dep = declare_dependency(
 )
 
 libspirv_tools_link_native = library('SPIRV-Tools-link-native',
+    spirv_generated_headers,
     link_src,
     dependencies : [spirv_tools_native_dep, spirv_tools_opt_native_dep, spvhdr_dep],
     include_directories : private_incdir,

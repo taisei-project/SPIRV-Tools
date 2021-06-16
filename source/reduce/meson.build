@@ -31,6 +31,7 @@ reduce_src = files(
 )
 
 libspirv_tools_recude = library('SPIRV-Tools-reduce',
+    spirv_generated_headers,
     reduce_src,
     dependencies : [spirv_tools_dep, spirv_tools_opt_dep, spvhdr_dep],
     include_directories : private_incdir,
@@ -44,6 +45,7 @@ spirv_tools_reduce_dep = declare_dependency(
 )
 
 libspirv_tools_recude_native = library('SPIRV-Tools-reduce-native',
+    spirv_generated_headers,
     reduce_src,
     dependencies : [spirv_tools_native_dep, spirv_tools_opt_native_dep, spvhdr_dep],
     include_directories : private_incdir,
