@@ -124,6 +124,7 @@ libspirv_tools_opt = library('SPIRV-Tools-opt',
     dependencies : [spirv_tools_dep, spvhdr_dep],
     include_directories : private_incdir,
     build_by_default : not meson.is_subproject(),
+    override_options : cross_options,
 )
 
 spirv_tools_opt_dep = declare_dependency(

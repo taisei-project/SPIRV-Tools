@@ -38,6 +38,7 @@ libspirv_tools_recude = library('SPIRV-Tools-reduce',
     dependencies : [spirv_tools_dep, spirv_tools_opt_dep, spvhdr_dep],
     include_directories : private_incdir,
     build_by_default : not meson.is_subproject(),
+    override_options : cross_options,
 )
 
 spirv_tools_reduce_dep = declare_dependency(

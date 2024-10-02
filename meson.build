@@ -12,6 +12,11 @@ native_options = [
     'b_sanitize=none',
     'debug=false',
     'optimization=0',
+    'cpp_std=gnu++17',
+]
+
+cross_options = [
+    'cpp_std=gnu++17',
 ]
 
 spvhdr_proj = subproject('SPIRV-Headers')
