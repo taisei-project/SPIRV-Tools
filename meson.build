@@ -1,5 +1,5 @@
 project('SPIRV-Tools', 'cpp',
-    version : '2024.2',
+    version : '2024.3',
     meson_version : '>=0.48.0',
     default_options : [
         'cpp_std=gnu++17',
