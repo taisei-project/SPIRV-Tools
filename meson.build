@@ -57,7 +57,7 @@ public_incdir = include_directories('include')
 subdir('utils')
 subdir('source')
 
-meson.override_dependency('SPIRV-Tools', spirv_tools_dep)
+meson.override_dependency('SPIRV-Tools', spirv_tools_opt_dep)  # SPIRV-Tools pkgconfig includes SPIRV-Tools-opt
 meson.override_dependency('SPIRV-Tools-opt', spirv_tools_opt_dep)
 meson.override_dependency('SPIRV-Tools-opt-internal', spirv_tools_opt_internal_dep)
 meson.override_dependency('SPIRV-Tools-link', spirv_tools_link_dep)
